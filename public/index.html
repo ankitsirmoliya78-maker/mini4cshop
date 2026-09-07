@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini4C Shop - Supplier Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen p-4">
+    <div class="max-w-md mx-auto bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+        <h1 class="text-2xl font-bold text-center text-blue-400 mb-6">Mini4C Store</h1>
+        
+        <!-- Order Form -->
+        <form id="orderForm" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Product ID (PID)</label>
+                <input type="text" id="productId" required class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 101">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Duration</label>
+                <select id="duration" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white focus:outline-none focus:border-blue-500">
+                    <option value="1">1 Day</option>
+                    <option value="7">7 Days</option>
+                    <option value="30">30 Days</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Android ID (Optional)</label>
+                <input type="text" id="androidId" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white focus:outline-none focus:border-blue-500" placeholder="Optional Device ID">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 font-semibold py-2 px-4 rounded transition duration-200">
+                Buy Now
+            </button>
+        </form>
+
+        <!-- Response Output -->
+        <div id="result" class="mt-6 p-4 rounded bg-gray-900 text-sm hidden"></div>
+    </div>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = 'Processing request...';
+
+            const payload = {
+                product_id: document.getElementById('productId').value,
+                duration: document.getElementById('duration').value,
+                android_id: document.getElementById('androidId').value
+            };
+
+            try {
+                const res = await fetch('/api/buy', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                resultDiv.innerHTML = `<pre class="whitespace-pre-wrap">${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (err) {
+                resultDiv.innerHTML = 'Error: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>
