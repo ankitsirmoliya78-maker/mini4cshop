@@ -1,1 +1,1319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MINI4C X CHEATS</title>
 
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#08090d;color:white;
+ font-family:Arial,sans-serif;
+ display:flex;align-items:center;justify-content:center;
+ min-height:100vh;padding:15px
+}
+.box{
+ width:100%;max-width:400px;
+ background:#11131a;padding:22px;
+ border:1px solid #292c35;border-radius:20px
+}
+.logo{
+ text-align:center;font-size:25px;font-weight:bold;
+ margin-bottom:5px
+}
+.sub{text-align:center;color:#888;font-size:12px;margin-bottom:20px}
+.tabs{display:flex;gap:6px;margin-bottom:15px}
+.tabs button{
+ flex:1;padding:11px;border:0;border-radius:10px;
+ background:#1b1e27;color:#888
+}
+.tabs .active{background:#e52d2d;color:white}
+input{
+ width:100%;padding:13px;margin:6px 0;
+ background:#090a0e;color:white;
+ border:1px solid #292c35;border-radius:10px;
+ outline:none
+}
+button{
+ cursor:pointer;font-weight:bold
+}
+.mainbtn{
+ width:100%;padding:13px;margin-top:10px;
+ border:0;border-radius:10px;
+ background:#e52d2d;color:white
+}
+.admin{
+ background:#1b1e27;margin-top:8px
+}
+.msg{
+ text-align:center;font-size:12px;margin-top:12px;color:#ff6565
+}
+.hide{display:none}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+ <div class="logo">MINI4C X CHEATS</div>
+ <div class="sub">Premium Digital Store</div>
+
+ <div class="tabs">
+  <button id="lt" class="active" onclick="tab('login')">LOGIN</button>
+  <button id="rt" onclick="tab('register')">REGISTER</button>
+ </div>
+
+ <!-- LOGIN -->
+
+ <div id="login">
+
+  <input id="user" placeholder="Username or Email">
+  <input id="pass" type="password" placeholder="Password">
+
+  <button class="mainbtn" onclick="login()">LOGIN</button>
+
+  <button class="mainbtn admin" onclick="adminLogin()">
+   👑 ADMIN LOGIN
+  </button>
+
+ </div>
+
+ <!-- REGISTER -->
+
+ <div id="register" class="hide">
+
+  <input id="ruser" placeholder="Username">
+  <input id="remail" placeholder="Email">
+  <input id="rmobile" placeholder="Mobile Number">
+  <input id="rpass" type="password" placeholder="Password">
+  <input id="rconfirm" type="password" placeholder="Confirm Password">
+
+  <button class="mainbtn" onclick="register()">
+   CREATE ACCOUNT
+  </button>
+
+ </div>
+
+ <div id="msg" class="msg"></div>
+
+</div>
+
+<script>
+
+function tab(type){
+
+ document.getElementById("login")
+   .classList.toggle("hide",type!="login");
+
+ document.getElementById("register")
+   .classList.toggle("hide",type!="register");
+
+ document.getElementById("lt")
+   .classList.toggle("active",type=="login");
+
+ document.getElementById("rt")
+   .classList.toggle("active",type=="register");
+
+ msg("");
+}
+
+function msg(text){
+ document.getElementById("msg").innerText=text;
+}
+
+async function login(){
+
+ const username=document.getElementById("user").value.trim();
+ const password=document.getElementById("pass").value;
+
+ if(!username||!password){
+  msg("Username and password required");
+  return;
+ }
+
+ try{
+
+  const res=await fetch("/api/login",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   credentials:"include",
+   body:JSON.stringify({username,password})
+  });
+
+  const data=await res.json();
+
+  if(!res.ok){
+   msg(data.message||data.error||"Login failed");
+   return;
+  }
+
+  location.reload();
+
+ }catch(e){
+  msg("Server connection failed");
+ }
+
+}
+
+async function register(){
+
+ const username=document.getElementById("ruser").value.trim();
+ const email=document.getElementById("remail").value.trim();
+ const mobile=document.getElementById("rmobile").value.trim();
+ const password=document.getElementById("rpass").value;
+ const confirm=document.getElementById("rconfirm").value;
+
+ if(!username||!email||!mobile||!password){
+  msg("All fields are required");
+  return;
+ }
+
+ if(password!==confirm){
+  msg("Passwords do not match");
+  return;
+ }
+
+ try{
+
+  const res=await fetch("/api/register",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    username,
+    email,
+    mobile,
+    password
+   })
+  });
+
+  const data=await res.json();
+
+  if(!res.ok){
+   msg(data.message||data.error||"Registration failed");
+   return;
+  }
+
+  msg("Account created! Please login.");
+  tab("login");
+
+ }catch(e){
+  msg("Server connection failed");
+ }
+
+}
+
+function adminLogin(){
+
+ tab("login");
+
+ document.getElementById("user").value="ADX ANKIT";
+ document.getElementById("pass").focus();
+
+ msg("Enter your admin password");
+
+}
+const products = [
+  {
+    name:"AIM HACK FF ROOT+NONROOT+IOS IPHONE+PC",
+    prices:[
+      ["1 Hours",15],["3 Hours",30],["6 Hours",40],
+      ["12 Hours",55],["1 Day",70],["3 Days",150],["7 Days",200]
+    ]
+  },
+  {
+    name:"XYZ CHEATS APK SILENT FF NONROOT",
+    prices:[
+      ["1 Hours",15],["3 Hours",35],["6 Hours",60],
+      ["12 Hours",130],["24 Hours",180]
+    ]
+  },
+  {
+    name:"XYZ CHEATS CONFIG PROXY FF NONROOT",
+    prices:[
+      ["1 Hours",15],["3 Hours",35],["6 Hours",60],
+      ["12 Hours",130],["24 Hours",180]
+    ]
+  },
+  {
+    name:"DRIPCLIENT WIRE FF NONROOT ANDROID",
+    prices:[
+      ["6 Hours",35],["12 Hours",55],["1 Day",90],["7 Days",350]
+    ]
+  },
+  {
+    name:"HG CHEATS ANDROID PROXY FF NONROOT",
+    prices:[
+      ["1 Day",70],["7 Days",270],["10 Days",300],["30 Days",500]
+    ]
+  }
+];
+    {
+    name:"HG CHEATS FF APKMOD NONROOT+ROOT",
+    prices:[
+      ["1 Day",70],["7 Days",270],["10 Days",300],["30 Days",500]
+    ]
+  },
+  {
+    name:"HAXX-CKER PRO FF ROOT",
+    prices:[
+      ["3 Days",180],["5 Days",280],["10 Days",550],
+      ["20 Days",1050],["30 Days",1450],["60 Days",2800]
+    ]
+  },
+  {
+    name:"SILENT CHEAT FF ROOT ANDROID",
+    prices:[
+      ["1 Day",90],["3 Days",180],["7 Days",350],
+      ["14 Days",600],["28 Days",900]
+    ]
+  },
+  {
+    name:"PATO TEAM FF ALL ANDROID",
+    prices:[
+      ["3 Days All Colours Mix",150],
+      ["7 Days All Colours Mix",300],
+      ["15 Days All Colours Mix",500],
+      ["30 Days All Colours Mix",700]
+    ]
+  },
+  {
+    name:"PRIME HOOK FF NONROOT ANDROID",
+    prices:[
+      ["1 Day Nonroot",50],["3 Days Nonroot",100],
+      ["7 Days Nonroot",270],["10 Days Nonroot",300]
+    ]
+  },
+    {
+    name:"HG CHEATS PRIME PROXY FF NONROOT",
+    prices:[
+      ["1 Day",70],["7 Days",250],["10 Days",300]
+    ]
+  },
+  {
+    name:"DRIPCLIENT FF NONROOT APKMOD",
+    prices:[
+      ["1 Day Nonroot",60],["3 Days Nonroot",140],
+      ["7 Days Nonroot",250],["15 Days Nonroot",400],
+      ["30 Days",600]
+    ]
+  },
+  {
+    name:"RAPID CORE FF ROOT ANDROID",
+    prices:[
+      ["1 Day",80],["7 Days",300],["14 Days",500],["30 Days",900]
+    ]
+  },
+  {
+    name:"NINE X FF NONROOT",
+    prices:[
+      ["10 Days",450]
+    ]
+  },
+  {
+    name:"DELTA PROXY IOS IPHONE",
+    prices:[
+      ["1 Day",150],["7 Days",350],["30 Days",700]
+    ]
+  },  {
+    name:"DRIPCLIENT PROXY FF NONROOT ANDROID",
+    prices:[
+      ["1 Day",60],["3 Days",140],["7 Days",250],["30 Days",600]
+    ]
+  },
+  {
+    name:"BALA MOD XYZ V4 FF NONROOT",
+    prices:[
+      ["1 Hours",15],["3 Hours",35],["6 Hours",60],
+      ["12 Hours",120],["1 Day",230],["2 Days",400],
+      ["3 Days",550],["5 Days",950],["7 Days",1300]
+    ]
+  },
+  {
+    name:"ABCD PANEL PROXY FF NONROOT",
+    prices:[
+      ["12 Hours",49],["1 Day",99],["3 Days",199],["7 Days",350]
+    ]
+  },
+  {
+    name:"XRAG FF ROOT+NONROOT+IOS IPHONE+PC",
+    prices:[
+      ["1 Hours",15],["3 Hours",30],["6 Hours",32],
+      ["12 Hours",55],["24 Hours",70],["3 Days",150],["7 Days",200]
+    ]
+  }
+];
+  function showProducts(){
+
+  document.body.innerHTML = `
+    <div class="products-page">
+      <h1>🛍️ MINI4C X CHEATS</h1>
+      <p>Choose your product</p>
+
+      <input
+        id="searchProduct"
+        placeholder="🔎 Search product..."
+        oninput="renderProducts()"
+      >
+
+      <div id="productsBox"></div>
+    </div>
+  `;
+
+  renderProducts();
+  }
+  function renderProducts(){
+
+  const box = document.getElementById("productsBox");
+  const search = document.getElementById("searchProduct").value.toLowerCase();
+
+  const list = products.filter(p =>
+    p.name.toLowerCase().includes(search)
+  );
+
+  box.innerHTML = list.map((p, i) => `
+
+    <div class="product-card">
+
+      <div class="product-icon">🎮</div>
+
+      <h2>${p.name}</h2>
+
+      <p class="product-status">● AVAILABLE</p>
+
+      <select id="duration${i}">
+        ${p.prices.map((x, j) => `
+          <option value="${j}">
+            ${x[0]} — ₹${x[1]}
+          </option>
+        `).join("")}
+      </select>
+
+      <button onclick="buyProduct(${i})">
+        🛒 BUY NOW
+      </button>
+
+    </div>
+
+  `).join("");
+  }
+  function buyProduct(index){
+
+  const product = products[index];
+
+  const durationIndex =
+    document.getElementById("duration" + index).value;
+
+  const selected = product.prices[durationIndex];
+
+  const duration = selected[0];
+  const price = selected[1];
+
+  alert(
+    "🛒 " + product.name +
+    "\n⏱️ " + duration +
+    "\n💰 ₹" + price
+  );
+  }
+  const productStyle = document.createElement("style");
+
+productStyle.textContent = `
+.products-page{
+  min-height:100vh;
+  padding:25px 15px;
+  background:#080808;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+.products-page h1{
+  margin-bottom:5px;
+  font-size:26px;
+}
+
+.products-page > p{
+  color:#aaa;
+  margin-bottom:20px;
+}
+
+#searchProduct{
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#121212;
+  color:#fff;
+  outline:none;
+  margin-bottom:20px;
+}
+
+.product-card{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.product-icon{
+  font-size:32px;
+}
+
+.product-card h2{
+  font-size:17px;
+  line-height:1.4;
+  margin:10px 0;
+}
+
+.product-status{
+  color:#36e58b;
+  font-size:13px;
+}
+
+.product-card select{
+  width:100%;
+  padding:13px;
+  margin:10px 0;
+  border-radius:10px;
+  background:#191919;
+  color:#fff;
+  border:1px solid #333;
+}
+
+.product-card button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:11px;
+  background:#fff;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+`;
+
+document.head.appendChild(productStyle);
+  function showHome(){
+
+  document.body.innerHTML = `
+    <div class="home-page">
+
+      <h1>👋 Welcome to<br>MINI4C X CHEATS</h1>
+
+      <p class="home-sub">
+        Fast • Secure • Digital Store
+      </p>
+
+      <div class="home-buttons">
+
+        <button onclick="showProducts()">
+          🛍️ Products
+        </button>
+
+        <button onclick="showWallet()">
+          💰 Wallet
+        </button>
+
+        <button onclick="showOrders()">
+          📦 My Orders
+        </button>
+
+      </div>
+
+    </div>
+  `;
+  }
+  function showWallet(){
+
+  document.body.innerHTML = `
+    <div class="wallet-page">
+
+      <h1>💰 My Wallet</h1>
+
+      <div class="balance-card">
+        <p>Available Balance</p>
+        <h2>₹0.00</h2>
+      </div>
+
+      <button onclick="showDeposit()">
+        ➕ Add Funds
+      </button>
+
+      <button onclick="showHome()">
+        🏠 Home
+      </button>
+
+    </div>
+  `;
+  }
+  function showDeposit(){
+
+  document.body.innerHTML = `
+    <div class="deposit-page">
+
+      <h1>💳 Add Funds</h1>
+
+      <div class="payment-box">
+
+        <p>Enter Amount</p>
+
+        <input
+          id="depositAmount"
+          type="number"
+          min="1"
+          placeholder="Enter amount ₹"
+        >
+
+        <button onclick="createDeposit()">
+          💰 Continue Payment
+        </button>
+
+      </div>
+
+      <button onclick="showWallet()">
+        ← Back to Wallet
+      </button>
+
+    </div>
+  `;
+  }
+  async function createDeposit(){
+
+  const amount =
+    Number(document.getElementById("depositAmount").value);
+
+  if(!amount || amount < 1){
+    alert("❌ Minimum amount ₹1");
+    return;
+  }
+
+  alert(
+    "💳 Payment system backend se connect hoga.\n" +
+    "Amount: ₹" + amount
+  );
+  }
+  function showOrders(){
+
+  document.body.innerHTML = `
+    <div class="orders-page">
+
+      <h1>📦 My Orders</h1>
+
+      <div class="order-card">
+
+        <h3>No orders yet</h3>
+
+        <p>
+          Your purchased products will appear here.
+        </p>
+
+        <span class="order-status">
+          Ready
+        </span>
+
+      </div>
+
+      <button onclick="showProducts()">
+        🛍️ Buy Product
+      </button>
+
+      <button onclick="showHome()">
+        🏠 Home
+      </button>
+
+    </div>
+  `;
+  }
+  function showAdmin(){
+
+  document.body.innerHTML = `
+    <div class="admin-page">
+
+      <h1>⚡ ADMIN PANEL</h1>
+      <p>MINI4C X CHEATS</p>
+
+      <div class="admin-grid">
+
+        <button onclick="adminProducts()">
+          🛍️ Product Manager
+        </button>
+
+        <button onclick="adminPrices()">
+          💰 Prices & Durations
+        </button>
+
+        <button onclick="adminOrders()">
+          📦 Orders
+        </button>
+
+        <button onclick="adminUsers()">
+          👥 Users
+        </button>
+
+        <button onclick="adminPayments()">
+          💳 Payments
+        </button>
+
+        <button onclick="adminSettings()">
+          ⚙️ Site Settings
+        </button>
+
+      </div>
+
+      <button onclick="showHome()">
+        🏠 Customer Home
+      </button>
+
+    </div>
+  `;
+  }
+  function adminProducts(){
+
+  document.body.innerHTML = `
+    <div class="admin-page">
+
+      <h1>🛍️ Product Manager</h1>
+
+      <button onclick="adminAddProduct()">
+        ➕ New Product
+      </button>
+
+      <div id="adminProductList"></div>
+
+      <button onclick="showAdmin()">
+        ← Admin Dashboard
+      </button>
+
+    </div>
+  `;
+
+  renderAdminProducts();
+  }
+  function renderAdminProducts(){
+
+  const box = document.getElementById("adminProductList");
+
+  box.innerHTML = products.map((p, i) => `
+
+    <div class="admin-product-card">
+
+      <h3>${p.name}</h3>
+
+      <p>📌 Product #${i + 1}</p>
+
+      <button onclick="editProduct(${i})">
+        ✏️ Edit
+      </button>
+
+      <button onclick="toggleProduct(${i})">
+        🔄 ON / OFF
+      </button>
+
+      <button onclick="deleteProduct(${i})">
+        🗑️ Delete
+      </button>
+
+    </div>
+
+  `).join("");
+  }
+  function adminAddProduct(){
+
+  document.body.innerHTML = `
+    <div class="admin-page">
+
+      <h1>➕ New Product</h1>
+
+      <input id="newName"
+        placeholder="Product Name">
+
+      <input id="newPid"
+        placeholder="Supplier Product ID / PID">
+
+      <input id="newDescription"
+        placeholder="Product Description">
+
+      <input id="newPlatform"
+        placeholder="Platform">
+
+      <input id="newPrice"
+        type="number"
+        placeholder="Starting Price ₹">
+
+      <button onclick="saveNewProduct()">
+        💾 Save Product
+      </button>
+
+      <button onclick="adminProducts()">
+        ← Back
+      </button>
+
+    </div>
+  `;
+}
+
+function saveNewProduct(){
+
+  const name =
+    document.getElementById("newName").value.trim();
+
+  const pid =
+    document.getElementById("newPid").value.trim();
+
+  const description =
+    document.getElementById("newDescription").value.trim();
+
+  const platform =
+    document.getElementById("newPlatform").value.trim();
+
+  const price =
+    Number(document.getElementById("newPrice").value);
+
+  if(!name || !pid || !price){
+    alert("❌ Product name, PID aur price required");
+    return;
+  }
+
+  products.push({
+    name:name,
+    pid:pid,
+    description:description,
+    platform:platform,
+    prices:[
+      ["1 Day",price]
+    ]
+  });
+
+  alert("✅ Product added");
+
+  adminProducts();
+}
+
+function editProduct(index){
+
+  const p = products[index];
+
+  document.body.innerHTML = `
+    <div class="admin-page">
+
+      <h1>✏️ Edit Product</h1>
+
+      <input id="editName"
+        value="${p.name}"
+        placeholder="Product Name">
+
+      <input id="editPid"
+        value="${p.pid || ""}"
+        placeholder="Supplier PID">
+
+      <input id="editDescription"
+        value="${p.description || ""}"
+        placeholder="Description">
+
+      <input id="editPlatform"
+        value="${p.platform || ""}"
+        placeholder="Platform">
+
+      <button onclick="saveEditProduct(${index})">
+        💾 Save Changes
+      </button>
+
+      <button onclick="adminProducts()">
+        ← Back
+      </button>
+
+    </div>
+  `;
+}
+
+function saveEditProduct(index){
+
+  products[index].name =
+    document.getElementById("editName").value.trim();
+
+  products[index].pid =
+    document.getElementById("editPid").value.trim();
+
+  products[index].description =
+    document.getElementById("editDescription").value.trim();
+
+  products[index].platform =
+    document.getElementById("editPlatform").value.trim();
+
+  alert("✅ Product updated");
+
+  adminProducts();
+}
+  function adminPrices(){
+
+  document.body.innerHTML = `
+    <div class="admin-page">
+
+      <h1>💰 Prices & Durations</h1>
+
+      <div id="priceManager"></div>
+
+      <button onclick="showAdmin()">
+        ← Admin Dashboard
+      </button>
+
+    </div>
+  `;
+
+  renderPrices();
+}
+
+function renderPrices(){
+
+  const box = document.getElementById("priceManager");
+
+  box.innerHTML = products.map((p,i) => `
+
+    <div class="admin-product-card">
+
+      <h3>${p.name}</h3>
+
+      ${p.prices.map((x,j) => `
+        <div class="price-row">
+
+          <span>${x[0]}</span>
+
+          <input
+            type="number"
+            value="${x[1]}"
+            id="price-${i}-${j}"
+          >
+
+          <button onclick="savePrice(${i},${j})">
+            💾
+          </button>
+
+          <button onclick="removeDuration(${i},${j})">
+            🗑️
+          </button>
+
+        </div>
+      `).join("")}
+
+      <button onclick="addDuration(${i})">
+        ➕ Add Duration
+      </button>
+
+    </div>
+
+  `).join("");
+}
+
+function savePrice(productIndex,priceIndex){
+
+  const value = Number(
+    document.getElementById(
+      `price-${productIndex}-${priceIndex}`
+    ).value
+  );
+
+  if(!value || value < 1){
+    alert("❌ Invalid price");
+    return;
+  }
+
+  products[productIndex].prices[priceIndex][1] = value;
+
+  alert("✅ Price updated");
+}
+
+function removeDuration(productIndex,priceIndex){
+
+  products[productIndex].prices.splice(priceIndex,1);
+
+  renderPrices();
+}
+
+function addDuration(productIndex){
+
+  const duration = prompt(
+    "Duration enter karo (example: 15 Days)"
+  );
+
+  if(!duration) return;
+
+  const price = Number(
+    prompt("Price ₹ enter karo")
+  );
+
+  if(!price || price < 1) return;
+
+  products[productIndex].prices.push([
+    duration,
+    price
+  ]);
+
+  renderPrices();
+}
+  function adminUsers(){
+  alert("👥 Users Manager\n\nReal users app.py se load honge.");
+}
+
+function adminOrders(){
+  alert("📦 Orders Manager\n\nReal orders app.py se load honge.");
+}
+
+function adminPayments(){
+  alert("💳 Payments Manager\n\nReal payments app.py se load honge.");
+}
+
+function adminSettings(){
+  document.body.innerHTML = `
+    <div class="admin-page">
+
+      <h1>⚙️ Site Settings</h1>
+
+      <input
+        id="siteName"
+        value="MINI4C X CHEATS"
+        placeholder="Site Name"
+      >
+
+      <input
+        id="upiId"
+        placeholder="UPI ID"
+      >
+
+      <input
+        id="telegramLink"
+        placeholder="Telegram Link"
+      >
+
+      <input
+        id="discordLink"
+        placeholder="Discord Link"
+      >
+
+      <textarea
+        id="announcement"
+        placeholder="Announcement"
+      ></textarea>
+
+      <button onclick="saveSettings()">
+        💾 Save Settings
+      </button>
+
+      <button onclick="showAdmin()">
+        ← Admin Dashboard
+      </button>
+
+    </div>
+  `;
+}
+
+function saveSettings(){
+
+  const siteName =
+    document.getElementById("siteName").value.trim();
+
+  const upi =
+    document.getElementById("upiId").value.trim();
+
+  if(!siteName){
+    alert("❌ Site name required");
+    return;
+  }
+
+  alert(
+    "✅ Settings saved\n\n" +
+    "Site: " + siteName +
+    "\nUPI: " + (upi || "Not set")
+  );
+}
+  const finalStyle = document.createElement("style");
+
+finalStyle.textContent = `
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#070707;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.admin-page,
+.home-page,
+.wallet-page,
+.deposit-page,
+.orders-page,
+.products-page{
+  min-height:100vh;
+  padding:22px 15px;
+  background:#070707;
+}
+
+.admin-page h1,
+.home-page h1,
+.wallet-page h1,
+.deposit-page h1,
+.orders-page h1,
+.products-page h1{
+  margin-top:0;
+}
+
+.admin-page input,
+.admin-page textarea{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border-radius:12px;
+  border:1px solid #292929;
+  background:#121212;
+  color:#fff;
+  outline:none;
+}
+
+.admin-page textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.admin-page button,
+.home-buttons button,
+.wallet-page button,
+.deposit-page button,
+.orders-page button{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  font-weight:bold;
+}
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:20px 0;
+}
+
+.admin-grid button{
+  min-height:75px;
+  border-radius:16px;
+  background:#151515;
+  color:#fff;
+  border:1px solid #292929;
+}
+
+.admin-product-card,
+.order-card,
+.balance-card,
+.payment-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:16px;
+  margin:12px 0;
+}
+
+.admin-product-card button{
+  padding:10px 12px;
+  margin:4px 2px;
+  border-radius:9px;
+  background:#222;
+  color:#fff;
+}
+
+.price-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin:8px 0;
+}
+
+.price-row span{
+  flex:1;
+}
+
+.price-row input{
+  width:80px;
+  padding:9px;
+  background:#191919;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:8px;
+}
+
+.price-row button{
+  margin:0;
+}
+
+.balance-card h2{
+  font-size:30px;
+  margin:8px 0;
+}
+
+.order-status{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 10px;
+  border-radius:8px;
+  background:#193d2b;
+  color:#5cffad;
+  font-size:12px;
+}
+`;
+
+document.head.appendChild(finalStyle);
+  function showMenu(){
+
+  document.body.innerHTML = `
+    <div class="home-page">
+
+      <h1>☰ MINI4C X CHEATS</h1>
+
+      <div class="home-buttons">
+
+        <button onclick="showHome()">
+          🏠 Home
+        </button>
+
+        <button onclick="showProducts()">
+          🛍️ Products
+        </button>
+
+        <button onclick="showWallet()">
+          💰 Wallet
+        </button>
+
+        <button onclick="showOrders()">
+          📦 My Orders
+        </button>
+
+        <button onclick="showDeposit()">
+          💳 Deposit
+        </button>
+
+        <button onclick="alert('🎫 Support will be connected in app.py')">
+          🎫 Support
+        </button>
+
+        <button onclick="alert('📢 Announcements will be connected in app.py')">
+          📢 Announcements
+        </button>
+
+        <button onclick="alert('❓ FAQ will be connected in app.py')">
+          ❓ FAQ
+        </button>
+
+        <button onclick="adminLogin()">
+          👑 Admin Login
+        </button>
+
+      </div>
+
+    </div>
+  `;
+  }
+  function showHome(){
+
+  document.body.innerHTML = `
+    <div class="home-page">
+
+      <button onclick="showMenu()"
+        style="width:auto;padding:12px 16px;
+        border-radius:12px;background:#151515;
+        color:#fff;border:1px solid #292929;">
+        ☰
+      </button>
+
+      <h1>🔥 MINI4C X CHEATS</h1>
+
+      <p class="home-sub">
+        Premium Digital Store
+      </p>
+
+      <div class="home-buttons">
+
+        <button onclick="showProducts()">
+          🛍️ Browse Products
+        </button>
+
+        <button onclick="showWallet()">
+          💰 My Wallet
+        </button>
+
+        <button onclick="showOrders()">
+          📦 My Orders
+        </button>
+
+      </div>
+
+    </div>
+  `;
+  }
+  function adminLogin(){
+
+  document.body.innerHTML = `
+    <div class="home-page">
+
+      <h1>👑 Admin Login</h1>
+
+      <input
+        id="adminUser"
+        placeholder="Admin Username"
+      >
+
+      <input
+        id="adminPass"
+        type="password"
+        placeholder="Admin Password"
+      >
+
+      <button
+        onclick="checkAdminLogin()"
+        style="width:100%;padding:14px;
+        border-radius:12px;background:#fff;
+        color:#000;font-weight:bold;">
+        🔐 Login
+      </button>
+
+      <button onclick="showHome()"
+        style="width:100%;padding:14px;
+        border-radius:12px;background:#151515;
+        color:#fff;">
+        ← Back
+      </button>
+
+    </div>
+  `;
+}
+
+function checkAdminLogin(){
+
+  const username =
+    document.getElementById("adminUser").value.trim();
+
+  const password =
+    document.getElementById("adminPass").value;
+
+  if(!username || !password){
+    alert("❌ Username aur password required");
+    return;
+  }
+
+  alert(
+    "Admin authentication app.py se secure tarike se verify hogi."
+  );
+}
+  </script>
+</body>
+</html>
+  
