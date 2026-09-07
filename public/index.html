@@ -3,68 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini4C Shop - Supplier Dashboard</title>
+    <title>MINI4C X CHEATS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #080711; font-family: sans-serif; }
+        .neon-btn { background: linear-gradient(90deg, #7c3aed, #c026d3); }
+        .neon-card { background: #0f0c20; border: 1px solid #1e1938; }
+        .glow-text { text-shadow: 0 0 10px rgba(192, 38, 211, 0.5); }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans min-h-screen p-4">
-    <div class="max-w-md mx-auto bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
-        <h1 class="text-2xl font-bold text-center text-blue-400 mb-6">Mini4C Store</h1>
-        
-        <!-- Order Form -->
-        <form id="orderForm" class="space-y-4">
+<body class="text-gray-100 min-h-screen pb-24">
+
+    <!-- Top Navigation Bar -->
+    <nav class="bg-[#0b0917]/90 backdrop-blur-md border-b border-[#1c1833] px-4 py-3 sticky top-0 z-40 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/50 flex items-center justify-center">
+                <i class="fa-solid fa-[#c026d3] fa-crown text-purple-400"></i>
+            </div>
             <div>
-                <label class="block text-sm font-medium mb-1">Product ID (PID)</label>
-                <input type="text" id="productId" required class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 101">
+                <h1 class="text-sm font-extrabold text-white tracking-wider glow-text leading-none">MINI4C X CHEATS</h1>
+                <p class="text-[9px] text-purple-400 font-bold uppercase tracking-widest">Play Smart • Stay Ahead</p>
+            </div>
+        </div>
+        <button onclick="switchTab('wallet')" class="bg-[#18132e] border border-purple-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs text-purple-300 font-bold">
+            <i class="fa-solid fa-wallet text-purple-400"></i> ₹<span id="userBalance">0.00</span>
+        </button>
+    </nav>
+
+    <!-- MAIN APP TABS -->
+    <main class="max-w-md mx-auto px-4 pt-4">
+
+        <!-- TAB 1: HOME -->
+        <section id="tab-home" class="tab-content">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-2xl neon-card p-5 mb-5 border-purple-500/30">
+                <div class="absolute -right-4 -bottom-4 opacity-20 text-purple-500 text-9xl">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h2 class="text-2xl font-black text-white glow-text">MINI4C X CHEATS</h2>
+                <p class="text-xs text-purple-300 font-semibold mt-1">ALL PANEL AVAILABLE</p>
+                <div class="flex gap-2 mt-4 text-[10px] font-bold">
+                    <span class="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-2 py-1 rounded-md">100% SAFE</span>
+                    <span class="bg-purple-900/40 text-purple-300 border border-purple-500/30 px-2 py-1 rounded-md">INSTANT DELIVERY</span>
+                </div>
             </div>
 
-            <div>
-                <label class="block text-sm font-medium mb-1">Duration</label>
-                <select id="duration" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white focus:outline-none focus:border-blue-500">
-                    <option value="1">1 Day</option>
-                    <option value="7">7 Days</option>
-                    <option value="30">30 Days</option>
-                </select>
+            <!-- Quick Action Links -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <a href="https://discord.gg" target="_blank" class="neon-card p-3 rounded-xl flex items-center gap-3 border-purple-500/20">
+                    <i class="fa-brands fa-discord text-xl text-indigo-400"></i>
+                    <div>
+                        <p class="text-xs font-bold text-white">Join Discord</p>
+                        <p class="text-[10px] text-gray-400">Updates & Giveaways</p>
+                    </div>
+                </a>
+                <a href="https://t.me" target="_blank" class="neon-card p-3 rounded-xl flex items-center gap-3 border-purple-500/20">
+                    <i class="fa-solid fa-[#38bdf8] fa-paper-plane text-xl text-sky-400"></i>
+                    <div>
+                        <p class="text-xs font-bold text-white">Telegram</p>
+                        <p class="text-[10px] text-gray-400">Contact Owner</p>
+                    </div>
+                </a>
             </div>
 
-            <div>
-                <label class="block text-sm font-medium mb-1">Android ID (Optional)</label>
-                <input type="text" id="androidId" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white focus:outline-none focus:border-blue-500" placeholder="Optional Device ID">
+            <!-- Products Title -->
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-fire text-amber-500"></i> Popular Products</h3>
+                <button onclick="switchTab('products')" class="text-xs text-purple-400 font-semibold">View All →</button>
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 font-semibold py-2 px-4 rounded transition duration-200">
-                Buy Now
+            <div id="homeProductsList" class="space-y-3"></div>
+        </section>
+
+        <!-- TAB 2: PRODUCTS -->
+        <section id="tab-products" class="tab-content hidden">
+            <h2 class="text-lg font-bold text-white mb-3">All Products</h2>
+            <div id="allProductsList" class="space-y-3"></div>
+        </section>
+
+        <!-- TAB 3: WALLET & UPI DEPOSIT -->
+        <section id="tab-wallet" class="tab-content hidden">
+            <div class="neon-card rounded-2xl p-5 mb-5 border-purple-500/30 text-center">
+                <p class="text-xs text-purple-300">Your Wallet Balance</p>
+                <h2 class="text-3xl font-black text-white my-1">₹<span id="walletTabBalance">0.00</span></h2>
+            </div>
+
+            <!-- Deposit Box -->
+            <div class="neon-card rounded-2xl p-5 border-purple-500/30 space-y-4">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-qrcode text-purple-400"></i> Deposit / UPI Payment
+                </h3>
+
+                <!-- Quick Amounts -->
+                <div>
+                    <label class="block text-xs text-gray-400 mb-2">1. Select Amount</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="setAmount(100)" class="bg-[#17122b] border border-purple-500/30 p-2 rounded-xl text-xs font-bold hover:border-purple-500">₹100</button>
+                        <button onclick="setAmount(200)" class="bg-[#17122b] border border-purple-500/30 p-2 rounded-xl text-xs font-bold hover:border-purple-500">₹200</button>
+                        <button onclick="setAmount(500)" class="bg-[#17122b] border border-purple-500/30 p-2 rounded-xl text-xs font-bold hover:border-purple-500">₹500</button>
+                    </div>
+                </div>
+
+                <!-- QR & UPI Details -->
+                <div class="text-center pt-2">
+                    <p class="text-xs text-gray-400 mb-2">2. Scan QR & Pay</p>
+                    <div class="bg-white p-3 rounded-2xl inline-block shadow-lg">
+                        <img id="upiQrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=ankittt.3@fam&pn=Mini4CStore" alt="UPI QR" class="w-36 h-36">
+                    </div>
+                    <p class="text-xs text-purple-300 font-mono mt-2 font-bold">ankittt.3@fam</p>
+                </div>
+
+                <!-- UTR Submission -->
+                <form id="utrForm" class="pt-2 space-y-3">
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">3. Enter UTR / Ref No.</label>
+                        <input type="text" id="utrInput" maxlength="12" required placeholder="Enter 12-digit UTR Number" class="w-full bg-[#080711] border border-[#272147] rounded-xl p-3 text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+                    <button type="submit" class="w-full neon-btn font-bold py-3 rounded-xl text-xs shadow-lg shadow-purple-600/30 active:scale-95 transition">Submit UTR</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB 4: ORDERS -->
+        <section id="tab-orders" class="tab-content hidden">
+            <h2 class="text-lg font-bold text-white mb-3">Order History</h2>
+            <div id="ordersList" class="space-y-3">
+                <p class="text-xs text-gray-500 text-center py-6">No orders placed yet.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PRODUCT DETAIL / PURCHASE MODAL -->
+    <div id="buyModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-end justify-center">
+        <div class="neon-card w-full max-w-md rounded-t-3xl p-5 border-t border-purple-500/40 relative">
+            <button onclick="closeBuyModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-        </form>
+            <h3 id="modalProdName" class="text-base font-extrabold text-white"></h3>
+            <p id="modalProdPid" class="text-[10px] text-purple-400 font-mono mb-4"></p>
 
-        <!-- Response Output -->
-        <div id="result" class="mt-6 p-4 rounded bg-gray-900 text-sm hidden"></div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Select Duration</label>
+                    <select id="modalDuration" onchange="calcModalPrice()" class="w-full bg-[#080711] border border-[#272147] rounded-xl p-3 text-xs text-white"></select>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Android ID (Optional)</label>
+                    <input type="text" id="modalAndroidId" placeholder="Required for V1 panel" class="w-full bg-[#080711] border border-[#272147] rounded-xl p-3 text-xs text-white">
+                </div>
+
+                <div class="flex justify-between items-center bg-[#080711] p-3 rounded-xl border border-[#272147]">
+                    <span class="text-xs text-gray-400">Total Price</span>
+                    <span id="modalTotalPrice" class="text-sm font-black text-purple-400">₹0</span>
+                </div>
+
+                <button onclick="executeOrder()" id="modalBuyBtn" class="w-full neon-btn font-bold py-3.5 rounded-xl text-xs shadow-lg shadow-purple-600/30">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-[#0a0818]/95 backdrop-blur-md border-t border-[#1c1833] py-2 px-6 flex justify-around items-center z-40 max-w-md mx-auto">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center gap-1 text-purple-400">
+            <i class="fa-solid fa-house text-base"></i>
+            <span class="text-[10px] font-bold">Home</span>
+        </button>
+        <button onclick="switchTab('products')" id="nav-products" class="nav-btn flex flex-col items-center gap-1 text-gray-500">
+            <i class="fa-solid fa-border-all text-base"></i>
+            <span class="text-[10px] font-bold">Products</span>
+        </button>
+        <button onclick="switchTab('wallet')" id="nav-wallet" class="nav-btn flex flex-col items-center gap-1 text-gray-500">
+            <i class="fa-solid fa-wallet text-base"></i>
+            <span class="text-[10px] font-bold">Wallet</span>
+        </button>
+        <button onclick="switchTab('orders')" id="nav-orders" class="nav-btn flex flex-col items-center gap-1 text-gray-500">
+            <i class="fa-solid fa-receipt text-base"></i>
+            <span class="text-[10px] font-bold">Orders</span>
+        </button>
     </div>
 
     <script>
-        document.getElementById('orderForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const resultDiv = document.getElementById('result');
-            resultDiv.classList.remove('hidden');
-            resultDiv.innerHTML = 'Processing request...';
+        let walletBalance = 0;
+        let selectedProductIndex = null;
 
-            const payload = {
-                product_id: document.getElementById('productId').value,
-                duration: document.getElementById('duration').value,
-                android_id: document.getElementById('androidId').value
-            };
+        const catalog = [
+            { name: "AIM HACK FF ROOT+NONROOT+IOS+PC", pid: "101", rates: { "1H": 15, "3H": 30, "6H": 40, "12H": 55, "1D": 70, "3D": 150, "7D": 200 } },
+            { name: "XYZ CHEATS APK SILENT FF NONROOT", pid: "102", rates: { "1H": 15, "3H": 35, "6H": 60, "12H": 130, "24H": 180 } },
+            { name: "XYZ CHEATS CONFIG PROXY FF NONROOT", pid: "103", rates: { "1H": 15, "3H": 35, "6H": 60, "12H": 130, "24H": 180 } },
+            { name: "DRIPCLIENT WIRE FF NONROOT ANDROID", pid: "104", rates: { "6H": 35, "12H": 55, "1D": 90, "7D": 350 } },
+            { name: "HG CHEATS ANDROID PROXY FF NONROOT", pid: "105", rates: { "1D": 70, "7D": 270, "10D": 300, "30D": 500 } },
+            { name: "HG CHEATS FF APKMOD NONROOT+ROOT", pid: "106", rates: { "1D": 70, "7D": 270, "10D": 300, "30D": 500 } },
+            { name: "HAXX-CKER PRO FF ROOT", pid: "107", rates: { "3D": 180, "5D": 280, "10D": 550, "20D": 1050, "30D": 1450, "60D": 2800 } },
+            { name: "SILENT CHEAT FF ROOT (SAFE)", pid: "108", rates: { "1D": 90, "3D": 180, "7D": 350, "14D": 600, "28D": 900 } },
+            { name: "SILENT CHEAT FF ROOT (BRUTAL)", pid: "109", rates: { "1D": 90, "3D": 180, "7D": 350, "14D": 600, "28D": 900 } },
+            { name: "PATO TEAM FF ALL ANDROID", pid: "110", rates: { "3D": 150, "7D": 300, "15D": 500, "30D": 700 } },
+            { name: "PRIME HOOK FF NONROOT ANDROID", pid: "111", rates: { "1D": 50, "3D": 100, "7D": 270, "10D": 300 } },
+            { name: "HG CHEATS PRIME PROXY FF NONROOT", pid: "112", rates: { "1D": 70, "7D": 250, "10D": 300 } },
+            { name: "DRIPCLIENT FF NONROOT APKMOD", pid: "113", rates: { "1D": 60, "3D": 140, "7D": 250, "15D": 400, "30D": 600 } },
+            { name: "RAPID CORE FF ROOT ANDROID", pid: "114", rates: { "1D": 80, "7D": 300, "14D": 500, "30D": 900 } },
+            { name: "NINE X FF NONROOT", pid: "115", rates: { "10D": 450 } },
+            { name: "DELTA PROXY IOS IPHONE", pid: "116", rates: { "1D": 150, "7D": 350, "30D": 700 } },
+            { name: "DRIPCLIENT PROXY FF NONROOT ANDROID", pid: "117", rates: { "1D": 60, "3D": 140, "7D": 250, "30D": 600 } },
+            { name: "BALA MOD XYZ V4 FF NONROOT", pid: "118", rates: { "1H": 15, "3H": 35, "6H": 60, "12H": 120, "1D": 230, "2D": 400, "3D": 550, "5D": 950, "7D": 1300 } },
+            { name: "ABCD PANEL PROXY FF NONROOT", pid: "119", rates: { "12H": 49, "1D": 99, "3D": 199, "7D": 350 } },
+            { name: "XRAG FF ROOT+NONROOT+IOS+PC", pid: "120", rates: { "1H": 15, "3H": 30, "6H": 32, "12H": 55, "24H": 70, "3D": 150, "7D": 200 } }
+        ];
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tab}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(el => el.className = 'nav-btn flex flex-col items-center gap-1 text-gray-500');
+            document.getElementById(`nav-${tab}`).className = 'nav-btn flex flex-col items-center gap-1 text-purple-400';
+        }
+
+        function renderProducts() {
+            const homeList = document.getElementById('homeProductsList');
+            const allList = document.getElementById('allProductsList');
+            
+            const html = catalog.map((item, i) => {
+                const firstDur = Object.keys(item.rates)[0];
+                const firstPrice = item.rates[firstDur];
+                return `
+                    <div class="neon-card p-4 rounded-2xl flex justify-between items-center border-purple-500/20">
+                        <div>
+                            <h4 class="text-xs font-extrabold text-white mb-1">${item.name}</h4>
+                            <p class="text-[11px] font-bold text-purple-400">₹${firstPrice} <span class="text-gray-500 text-[9px]">/ ${firstDur}</span></p>
+                        </div>
+                        <button onclick="openBuyModal(${i})" class="neon-btn text-xs font-bold px-4 py-2 rounded-xl shadow-md shadow-purple-600/20 active:scale-95 transition">Buy Now</button>
+                    </div>
+                `;
+            }).join('');
+
+            homeList.innerHTML = html;
+            allList.innerHTML = html;
+        }
+
+        function openBuyModal(index) {
+            selectedProductIndex = index;
+            const item = catalog[index];
+            document.getElementById('modalProdName').innerText = item.name;
+            document.getElementById('modalProdPid').innerText = `PID: ${item.pid}`;
+            
+            const dSel = document.getElementById('modalDuration');
+            dSel.innerHTML = Object.keys(item.rates).map(dur => `<option value="${dur}">${dur}</option>`).join('');
+            
+            calcModalPrice();
+            document.getElementById('buyModal').classList.remove('hidden');
+        }
+
+        function closeBuyModal() {
+            document.getElementById('buyModal').classList.add('hidden');
+        }
+
+        function calcModalPrice() {
+            const item = catalog[selectedProductIndex];
+            const dur = document.getElementById('modalDuration').value;
+            document.getElementById('modalTotalPrice').innerText = `₹${item.rates[dur]}`;
+        }
+
+        function setAmount(amt) {
+            document.getElementById('upiQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=ankittt.3@fam&pn=Mini4CStore&am=${amt}`;
+        }
+
+        document.getElementById('utrForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const utr = document.getElementById('utrInput').value;
+            if(utr.length === 12) {
+                alert(`UTR ${utr} submitted! Balance will be updated upon payment verification.`);
+                document.getElementById('utrInput').value = '';
+            } else {
+                alert("Please enter valid 12-digit UTR/Ref number.");
+            }
+        });
+
+        async function executeOrder() {
+            const item = catalog[selectedProductIndex];
+            const dur = document.getElementById('modalDuration').value;
+            const price = item.rates[dur];
+
+            if(walletBalance < price) {
+                alert("Insufficient Wallet Balance! Please add funds via Wallet tab.");
+                switchTab('wallet');
+                closeBuyModal();
+                return;
+            }
+
+            const btn = document.getElementById('modalBuyBtn');
+            btn.disabled = true;
+            btn.innerText = "Processing Order...";
 
             try {
                 const res = await fetch('/api/buy', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        product_id: item.pid,
+                        duration: dur,
+                        android_id: document.getElementById('modalAndroidId').value
+                    })
                 });
-                const data = await res.json();
-                resultDiv.innerHTML = `<pre class="whitespace-pre-wrap">${JSON.stringify(data, null, 2)}</pre>`;
-            } catch (err) {
-                resultDiv.innerHTML = 'Error: ' + err.message;
+                const responseData = await res.json();
+                
+                if(responseData.success) {
+                    walletBalance -= price;
+                    updateBalanceDisplays();
+                    alert("Order Successful!\nResponse: " + JSON.stringify(responseData.data));
+                    closeBuyModal();
+                } else {
+                    alert("Order Failed: " + responseData.message);
+                }
+            } catch(e) {
+                alert("Error: " + e.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Buy Now";
             }
-        });
+        }
+
+        function updateBalanceDisplays() {
+            document.getElementById('userBalance').innerText = walletBalance.toFixed(2);
+            document.getElementById('walletTabBalance').innerText = walletBalance.toFixed(2);
+        }
+
+        renderProducts();
+        updateBalanceDisplays();
     </script>
 </body>
 </html>
+
